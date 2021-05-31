@@ -54,4 +54,8 @@ namespace AlchemRenderer {
         glUniformMatrix4fv(GetUniformLocation(program, uniformName), 1, GL_FALSE, &value[0][0]);
     }
 
+    void IntUniform(ui32 program, const string& uniformName, i32 value) {
+        glUniform1i(GetUniformLocation(program, uniformName), value);
+    }
+
 }

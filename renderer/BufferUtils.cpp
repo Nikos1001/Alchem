@@ -1,17 +1,18 @@
 
 #pragma once
-#include "../utils.h"
+#include "../types.h"
 #include "BufferUtils.h"
 #include <vector>
 #include <GL/glew.h>
 
 namespace AlchemRenderer {
 
-    ptr<BufferCollection> CreateBuffers(array<f32>& verts, array<f32>& uvs, array<ui32>& indices) {
+    ptr<BufferCollection> CreateBuffers(array<f32>& verts, array<f32>& uvs, array<f32>& tex, array<ui32>& indices) {
         ptr<BufferCollection> buffers = std::make_unique<BufferCollection>();
 
         glGenBuffers(1, &buffers->vertVBO);
         glGenBuffers(1, &buffers->uvVBO);
+        glGenBuffers(1, &buffers->texVBO);
         glGenBuffers(1, &buffers->ebo);
 
         glGenVertexArrays(1, &buffers->vao);
@@ -32,6 +33,12 @@ namespace AlchemRenderer {
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(f32), (void*)0);
         glEnableVertexAttribArray(1);
 
+        glBindBuffer(GL_ARRAY_BUFFER, buffers->texVBO);
+        glBufferData(GL_ARRAY_BUFFER, tex.size() * sizeof(f32), tex.data(), GL_STATIC_DRAW);
+
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(f32), (void*)0);
+        glEnableVertexAttribArray(2);
+
         buffers->tris = indices.size() / 3;
 
         return buffers;
@@ -43,7 +50,7 @@ namespace AlchemRenderer {
         glDrawElements(GL_TRIANGLES, buffers->tris * 3, GL_UNSIGNED_INT, 0);
     }
 
-    void UpdateBuffers(BufferCollection* buffers, f32* verts, f32* uvs, ui32* indices, i32 numVerts, i32 numIndices) {
+    void UpdateBuffers(BufferCollection* buffers, f32* verts, f32* uvs, f32* tex, ui32* indices, i32 numVerts, i32 numIndices) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers->ebo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(ui32), indices, GL_STATIC_DRAW);
 
@@ -52,6 +59,9 @@ namespace AlchemRenderer {
 
         glBindBuffer(GL_ARRAY_BUFFER, buffers->uvVBO);
         glBufferData(GL_ARRAY_BUFFER, 2 * numVerts * sizeof(f32), uvs, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, buffers->texVBO);
+        glBufferData(GL_ARRAY_BUFFER, numVerts * sizeof(f32), tex, GL_STATIC_DRAW);
 
         buffers->tris = numIndices / 3;
 

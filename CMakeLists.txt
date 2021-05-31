@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS -L/usr/local/lib/)
 
 file(GLOB Alchem CONFIGURE_DEPENDS "*.h" "*.cpp")
 
-add_executable(Alchem main.cpp utils.h renderer/ShaderUtils.h renderer/ShaderUtils.cpp renderer/BufferUtils.h renderer/BufferUtils.cpp renderer/Renderer2D.cpp renderer/Renderer2D.h)
+add_executable(Alchem main.cpp types.h renderer/ShaderUtils.h renderer/ShaderUtils.cpp renderer/BufferUtils.h renderer/BufferUtils.cpp renderer/Renderer2D.cpp renderer/Renderer2D.h renderer/stb_image.h renderer/TextureUtils.h renderer/TextureUtils.cpp)
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)

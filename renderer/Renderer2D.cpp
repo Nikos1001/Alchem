@@ -1,14 +1,13 @@
 
 #include <GL/glew.h>
-#include "../utils.h"
+#include "../types.h"
 #include "ShaderUtils.h"
 #include <string>
 #include <fstream>
 #include "BufferUtils.h"
 #include "glm/ext.hpp"
 #include "Renderer2D.h"
-
-#pragma once
+#include "TextureUtils.h"
 
 f32 verts[4][3] = {
         {0.5f,  0.5f, 0.0f},
@@ -26,7 +25,26 @@ f32 uvs[8] = {
 
 namespace AlchemRenderer {
 
-    void Renderer2D::SubmitQuad(glm::mat4& transform) {
+    void Renderer2D::SubmitQuad(glm::mat4& transform, ui32 texture) {
+
+        ui32 textureSlot = -1;
+        for(i32 i = 0; i < textureSlots; i++) {
+            if(usedTextures[i] == texture) {
+                textureSlot = i;
+                break;
+            }
+            if(usedTextures[i] == -1) {
+                textureSlot = i;
+                usedTextures[i] = texture;
+                break;
+            }
+        }
+        if(textureSlot == -1) {
+            RenderBatch();
+            textureSlot = 0;
+            usedTextures[0] = texture;
+        }
+
         zOff += 0.01;
         for(i32 i = 0; i < 4; i ++) {
             glm::vec4 vert = glm::vec4(verts[i][0], verts[i][1], verts[i][2] - zOff, 1);
@@ -46,10 +64,12 @@ namespace AlchemRenderer {
         batchIndices[renderedQuads * 6 + 4] = renderedQuads * 4 + 3;
         batchIndices[renderedQuads * 6 + 5] = renderedQuads * 4 + 2;
 
+        for(i32 i = 0; i < 4; i++)
+            batchTextures[renderedQuads * 4 + i] = textureSlot;
+
         renderedQuads++;
         if(renderedQuads >= maxBufferedQuads) {
             RenderBatch();
-            renderedQuads = 0;
         }
     }
 
@@ -70,20 +90,19 @@ namespace AlchemRenderer {
 
         array<f32> temp;
         array<ui32> temp2;
-        batchBuffer = CreateBuffers(temp, temp, temp2);
+        array<i32> temp3;
+        batchBuffer = CreateBuffers(temp, temp, temp, temp2);
     }
 
-    ui32 Renderer2D::shaderProgram = 0;
-    ptr<BufferCollection> Renderer2D::batchBuffer = nullptr;
-    f32 Renderer2D::zOff = 0;
-    i32 Renderer2D::renderedQuads = 0;
-    f32 Renderer2D::batchVerts[maxBufferedQuads * 4 * 3];
-    f32 Renderer2D::batchUvs[maxBufferedQuads * 4 * 2];
-    ui32 Renderer2D::batchIndices[maxBufferedQuads * 6];
-
     void Renderer2D::BeginScene() {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         renderedQuads = 0;
         zOff = 0;
+        for(i32 i = 0; i < textureSlots; i++)
+            usedTextures[i] = -1;
+        drawCalls = 0;
     }
 
     void Renderer2D::EndScene() {
@@ -92,10 +111,30 @@ namespace AlchemRenderer {
     }
 
     void Renderer2D::RenderBatch() {
-        UpdateBuffers(batchBuffer.get(), &batchVerts[0], &batchUvs[0], &batchIndices[0], renderedQuads * 4, renderedQuads * 6);
+        drawCalls++;
+        UpdateBuffers(batchBuffer.get(), &batchVerts[0], &batchUvs[0], &batchTextures[0], &batchIndices[0], renderedQuads * 4, renderedQuads * 6);
         BindProgram(shaderProgram);
         glm::mat4 mat(1.0f);
         Mat4Uniform(shaderProgram, "uTransform", mat);
+        for(i32 i = 0; i < textureSlots; i++) {
+            IntUniform(shaderProgram, "uAlbedo[" + std::to_string(i) + "]", i);
+            UseTextures(usedTextures[i], i);
+        }
         RenderBuffers(batchBuffer.get());
+        renderedQuads = 0;
     }
+
+    ptr<BufferCollection> Renderer2D::batchBuffer = nullptr;
+    ui32 Renderer2D::shaderProgram = 0;
+
+    f32 Renderer2D::batchVerts[maxBufferedQuads * 4 * 3];
+    f32 Renderer2D::batchUvs[maxBufferedQuads * 4 * 2];
+    ui32 Renderer2D::batchIndices[maxBufferedQuads * 6];
+    f32 Renderer2D::batchTextures[maxBufferedQuads * 4];
+    i32 Renderer2D::usedTextures[textureSlots];
+    i32 Renderer2D::renderedQuads = 0;
+    f32 Renderer2D::zOff = 0;
+    i32 Renderer2D::drawCalls = 0;
+
+
 }

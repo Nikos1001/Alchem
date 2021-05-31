@@ -1,6 +1,6 @@
 
 #pragma once
-#include "../utils.h"
+#include "../types.h"
 #include <glm/ext.hpp>
 
 namespace AlchemRenderer {
@@ -11,5 +11,6 @@ namespace AlchemRenderer {
 
     ui32 GetUniformLocation(ui32 program, const string& uniformName);
     void Mat4Uniform(ui32 program, const string& uniformName, glm::mat4 value);
+    void IntUniform(ui32 program, const string& uniformName, i32 value);
 
 };
