@@ -1,31 +1,13 @@
 #include <iostream>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include "types.h"
-#include "glm/ext.hpp"
-#include "renderer/Renderer2D.h"
-#include <memory>
 #include <chrono>
+#include <glm/ext.hpp>
+#include "types.h"
+#include "renderer/Renderer2D.h"
 #include "renderer/TextureUtils.h"
+#include "renderer/Window.h"
 
 int main() {
-    glfwInit();
-    glfwWindowHint(GLFW_SAMPLES, 16); // 4x antialiasing
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    GLFWwindow* window = glfwCreateWindow(800, 600, "L'Window", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwShowWindow(window);
-
-    glewInit();
+    AlchemRenderer::Window::Open();
 
     glm::mat4 projection = glm::ortho<f32>(-4, 4, -3, 3, -100, 100);
     glm::mat4 transform = projection;
@@ -43,7 +25,7 @@ int main() {
 
     f32 fps = 0;
     f32 timer = 0;
-    while(!glfwWindowShouldClose(window))
+    while(!AlchemRenderer::Window::ShouldClose())
     {
         AlchemRenderer::Renderer2D::BeginScene();
 
@@ -62,11 +44,9 @@ int main() {
             std::cout << fps << " " << AlchemRenderer::Renderer2D::drawCalls << std::endl;
         }
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        AlchemRenderer::Window::EndFrame();
 
     }
-    glfwTerminate();
 
     return 0;
 }
