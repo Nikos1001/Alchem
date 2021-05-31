@@ -16,5 +16,4 @@ void main() {
     if(color.a < 0.99f)
         discard;
     frag = color;
-    //frag = vec4(textureIdx / 1000000, textureIdx / 1000000, textureIdx / 1000000, 1.0f);
 }

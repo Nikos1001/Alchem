@@ -26,7 +26,6 @@ f32 uvs[8] = {
 namespace AlchemRenderer {
 
     void Renderer2D::SubmitQuad(glm::mat4& transform, ui32 texture) {
-
         ui32 textureSlot = -1;
         for(i32 i = 0; i < textureSlots; i++) {
             if(usedTextures[i] == texture) {
@@ -67,10 +66,12 @@ namespace AlchemRenderer {
         for(i32 i = 0; i < 4; i++)
             batchTextures[renderedQuads * 4 + i] = textureSlot;
 
+
         renderedQuads++;
         if(renderedQuads >= maxBufferedQuads) {
             RenderBatch();
         }
+
     }
 
     void Renderer2D::Initialize() {
