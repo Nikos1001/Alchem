@@ -35,4 +35,10 @@ namespace AlchemRenderer {
     }
 
     GLFWwindow* Window::window = nullptr;
+
+    WindowSize Window::GetSize() {
+        WindowSize result = {};
+        glfwGetWindowSize(window, &result.w, &result.h);
+        return result;
+    }
 }

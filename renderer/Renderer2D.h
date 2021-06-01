@@ -13,6 +13,7 @@ namespace AlchemRenderer {
         static void BeginScene();
         static void EndScene();
         static i32 drawCalls;
+        static glm::mat4 globalTransformation;
 
     private:
 

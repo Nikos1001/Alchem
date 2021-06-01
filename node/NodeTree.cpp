@@ -1,6 +1,7 @@
 
 #include "NodeTree.h"
 #include "node2D/spriteNode/SpriteNode.h"
+#include "node2D/cameraNode/CameraNode.h"
 
 namespace Alchem {
 
@@ -36,6 +37,7 @@ namespace Alchem {
 
     NodeTree::NodeTree(Runtime* rt) {
         nodes.push_back(std::make_unique<SpriteNode>());
+        nodes.push_back(std::make_unique<CameraNode>());
         runtime = rt;
     }
 }

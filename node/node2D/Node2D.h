@@ -8,6 +8,8 @@ namespace Alchem {
 
     class Node2D : public Node {
     public:
+        Node2D();
+
         virtual void Initialize(Runtime* rt);
 
         virtual void BeginFrame();
@@ -18,8 +20,10 @@ namespace Alchem {
         virtual void Render();
         virtual void EndRenderFrame();
 
-        glm::vec2 position, scale;
-        f32 rotation;
+        glm::mat4 GetTransformation();
+
+        glm::vec2 position = glm::vec2(0, 0), scale = glm::vec2(1, 1);
+        f32 rotation = 0;
     };
 
 }

@@ -99,6 +99,9 @@ namespace AlchemRenderer {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        glm::mat4 mat(1.0f);
+        globalTransformation = mat;
+
         renderedQuads = 0;
         zOff = 0;
         for(i32 i = 0; i < textureSlots; i++)
@@ -115,8 +118,7 @@ namespace AlchemRenderer {
         drawCalls++;
         UpdateBuffers(batchBuffer.get(), &batchVerts[0], &batchUvs[0], &batchTextures[0], &batchIndices[0], renderedQuads * 4, renderedQuads * 6);
         BindProgram(shaderProgram);
-        glm::mat4 mat(1.0f);
-        Mat4Uniform(shaderProgram, "uTransform", mat);
+        Mat4Uniform(shaderProgram, "uTransform", globalTransformation);
         for(i32 i = 0; i < textureSlots; i++) {
             IntUniform(shaderProgram, "uAlbedo[" + std::to_string(i) + "]", i);
             UseTextures(usedTextures[i], i);
@@ -127,6 +129,8 @@ namespace AlchemRenderer {
 
     ptr<BufferCollection> Renderer2D::batchBuffer = nullptr;
     ui32 Renderer2D::shaderProgram = 0;
+
+    glm::mat4 Renderer2D::globalTransformation = glm::mat4(2.0f);
 
     f32 Renderer2D::batchVerts[maxBufferedQuads * 4 * 3];
     f32 Renderer2D::batchUvs[maxBufferedQuads * 4 * 2];
