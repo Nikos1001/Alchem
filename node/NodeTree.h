@@ -15,6 +15,7 @@ namespace Alchem {
         void Update(f32 delta);
     private:
         array<ptr<Node>> nodes;
+        Runtime* runtime;
     };
 
 }

@@ -5,6 +5,12 @@
 namespace Alchem {
 
     void NodeTree::Update(f32 delta) {
+        for(auto& node : nodes) {
+            if(!node->initialized) {
+                node->initialized = true;
+                node->Initialize(runtime);
+            }
+        }
 
         for(auto& node : nodes) {
             node->BeginFrame();
@@ -30,6 +36,6 @@ namespace Alchem {
 
     NodeTree::NodeTree(Runtime* rt) {
         nodes.push_back(std::make_unique<SpriteNode>());
-        nodes[0]->Initialize(rt);
+        runtime = rt;
     }
 }

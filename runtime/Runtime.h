@@ -3,6 +3,9 @@
 
 #include "../application/Application.h"
 #include "../node/NodeTree.h"
+#include "../resources/ResourceManager.h"
+#include "../renderer/Texture.h"
+#include "../resources/TextureManager.h"
 
 namespace Alchem {
 
@@ -11,12 +14,12 @@ namespace Alchem {
     class Runtime : public Application {
     public:
         explicit Runtime(const string& projectPath);
-        ui32 tex;
+        string GetPath(const string& path);
+        ptr<AlchemResource::TextureManager> textures;
     private:
         void Start() override;
         void Update(f32 delta) override;
         bool ShouldContinue() override;
-        string GetPath(const string& path);
 
         ptr<NodeTree> nodes;
 

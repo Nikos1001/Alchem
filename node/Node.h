@@ -9,6 +9,8 @@ namespace Alchem {
     class Runtime;
 
     class Node {
+    friend class NodeTree;
+
     public:
         virtual void Initialize(Runtime* runtime);
 
@@ -22,6 +24,7 @@ namespace Alchem {
 
     protected:
         Runtime* runtime;
+        bool initialized;
     };
 
 }

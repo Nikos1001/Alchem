@@ -2,6 +2,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using i32 = int32_t;
 using ui32 = uint32_t;
@@ -15,3 +16,5 @@ template <typename T>
 using ptr = std::unique_ptr<T>;
 template <typename T>
 using array = std::vector<T>;
+template <typename T, typename Q>
+using map = std::unordered_map<T, Q>;
