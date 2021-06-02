@@ -6,10 +6,7 @@ namespace Alchem {
 
     void SpriteNode::Initialize(Runtime *rt) {
         Node2D::Initialize(rt);
-        SetPath("logo.png");
-        position = glm::vec2(2, 1);
-        scale = glm::vec2(0.815, 1);
-        rotation = 1.32344;
+        SetPath(path);
     }
 
     void SpriteNode::Render() {
@@ -18,12 +15,17 @@ namespace Alchem {
         if(tex != nullptr) {
             AlchemRenderer::Renderer2D::SubmitQuad(transform, tex->texId);
         }
-        rotation += 0.01;
     }
 
     void SpriteNode::SetPath(const string& newPath) {
         path = newPath;
+        std::cout << path << std::endl;
         textureHandle = runtime->textures->GetHandle(path);
+    }
+
+    void SpriteNode::LoadFromJSON(json data) {
+        Node2D::LoadFromJSON(data);
+        path = data["spritePath"];
     }
 
 }

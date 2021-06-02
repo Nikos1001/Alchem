@@ -1,0 +1,32 @@
+{
+  "name": "root",
+  "type": "Node",
+  "children": [
+    {
+      "name": "alchem logo",
+      "type": "SpriteNode",
+      "position": [3, 2],
+      "scale": [1.63, 2],
+      "rotation": 0,
+      "children": [],
+      "spritePath": "logo.png"
+    },
+    {
+      "name": "alchem logo",
+      "type": "SpriteNode",
+      "position": [-3, 0],
+      "scale": [1.5, 1.5],
+      "rotation": 0.75,
+      "children": [],
+      "spritePath": "logo2.png"
+    },
+    {
+      "name": "le camera",
+      "type": "CameraNode",
+      "position": [0, 0],
+      "scale": [1, 1],
+      "rotation": 0,
+      "children": []
+    }
+  ]
+}

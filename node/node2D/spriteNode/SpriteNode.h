@@ -12,6 +12,7 @@ namespace Alchem {
         void Initialize(Runtime* rt) override;
         void Render() override;
         void SetPath(const string& newPath);
+        void LoadFromJSON(json data) override;
     private:
         string path;
         AlchemResource::ResourceHandle textureHandle;

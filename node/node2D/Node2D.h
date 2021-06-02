@@ -10,15 +10,7 @@ namespace Alchem {
     public:
         Node2D();
 
-        virtual void Initialize(Runtime* rt);
-
-        virtual void BeginFrame();
-        virtual void Update(f32 delta);
-        virtual void EndFrame();
-
-        virtual void BeginRenderFrame();
-        virtual void Render();
-        virtual void EndRenderFrame();
+        void LoadFromJSON(json data) override;
 
         glm::mat4 GetTransformation();
 

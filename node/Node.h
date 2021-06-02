@@ -22,6 +22,8 @@ namespace Alchem {
         virtual void Render();
         virtual void EndRenderFrame();
 
+        virtual void LoadFromJSON(json data);
+
     protected:
         Runtime* runtime;
         bool initialized;

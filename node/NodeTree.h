@@ -13,6 +13,7 @@ namespace Alchem {
     public:
         NodeTree(Runtime* rt);
         void Update(f32 delta);
+        void LoadJSONNode(const json& nodeData);
     private:
         array<ptr<Node>> nodes;
         Runtime* runtime;

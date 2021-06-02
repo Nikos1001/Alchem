@@ -3,6 +3,10 @@
 #include "node2D/spriteNode/SpriteNode.h"
 #include "node2D/cameraNode/CameraNode.h"
 
+#define NODE_TYPE(typeName) \
+    if(type == #typeName) \
+        nodes.push_back(std::make_unique<typeName>());
+
 namespace Alchem {
 
     void NodeTree::Update(f32 delta) {
@@ -36,8 +40,23 @@ namespace Alchem {
     }
 
     NodeTree::NodeTree(Runtime* rt) {
-        nodes.push_back(std::make_unique<SpriteNode>());
-        nodes.push_back(std::make_unique<CameraNode>());
         runtime = rt;
+    }
+
+    void NodeTree::LoadJSONNode(const json& nodeData) {
+        std::cout << nodeData << std::endl;
+        string type = nodeData["type"];
+
+        NODE_TYPE(Node);
+        NODE_TYPE(Node2D);
+        NODE_TYPE(SpriteNode);
+        NODE_TYPE(CameraNode);
+
+        Node *newNode = nodes.back().get();
+        newNode->LoadFromJSON(nodeData);
+
+        for(const auto& childData : nodeData["children"]) {
+            LoadJSONNode(childData);
+        }
     }
 }

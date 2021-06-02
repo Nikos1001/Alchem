@@ -31,4 +31,8 @@ namespace Alchem {
 
     }
 
+    void Node::LoadFromJSON(json data) {
+
+    }
+
 }
