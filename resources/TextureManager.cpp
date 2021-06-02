@@ -3,7 +3,6 @@
 #include "../renderer/TextureUtils.h"
 #include "../runtime/Runtime.h"
 #include "ResourceManager.h"
-#pragma once
 
 namespace AlchemResource {
 

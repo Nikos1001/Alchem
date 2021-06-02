@@ -8,9 +8,10 @@ namespace Alchem {
 
     class Node2D : public Node {
     public:
-        Node2D();
+        Node2D(Runtime* rt);
 
         void LoadFromJSON(json data) override;
+        void Initialize() override;
 
         glm::mat4 GetTransformation();
 

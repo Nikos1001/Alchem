@@ -9,10 +9,10 @@ namespace Alchem {
     class Runtime;
 
     class Node {
-    friend class NodeTree;
 
     public:
-        virtual void Initialize(Runtime* runtime);
+        Node(Runtime* runtime);
+        virtual void Initialize();
 
         virtual void BeginFrame();
         virtual void Update(f32 delta);
@@ -26,8 +26,13 @@ namespace Alchem {
 
     protected:
         Runtime* runtime;
+        array<ptr<Node>> children;
+        Node* parent;
+    private:
         bool initialized;
     };
+
+    ptr<Node> LoadNodeFromJSON(json data, Runtime* rt);
 
 }
 

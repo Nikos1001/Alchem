@@ -5,7 +5,7 @@
 
 namespace Alchem {
 
-    CameraNode::CameraNode() : Node2D() {
+    CameraNode::CameraNode(Runtime* rt) : Node2D(rt) {
         cameraSize = 5;
     }
 

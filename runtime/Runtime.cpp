@@ -9,12 +9,11 @@ namespace Alchem {
     Runtime::Runtime(const string& projectPath) {
         projPath = projectPath;
         textures = std::make_unique<AlchemResource::TextureManager>(this);
-        nodes = std::make_unique<NodeTree>(this);
 
         std::ifstream nodeFile(GetPath("main.alcmNode"));
         json nodeData;
         nodeFile >> nodeData;
-        nodes->LoadJSONNode(nodeData);
+        root = LoadNodeFromJSON(nodeData, this);
     }
 
     void Runtime::Start() {
@@ -26,7 +25,13 @@ namespace Alchem {
 
         AlchemRenderer::Renderer2D::BeginScene();
 
-        nodes->Update(delta);
+        root->BeginFrame();
+        root->Update(delta);
+        root->EndFrame();
+        root->BeginRenderFrame();
+        root->Render();
+        root->EndRenderFrame();
+
 
         AlchemRenderer::Renderer2D::EndScene();
 

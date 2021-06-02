@@ -39,6 +39,8 @@ namespace AlchemResource {
         }
 
         T *Get(ResourceHandle handle) {
+            if(uids.size() <= handle.index)
+                return nullptr;
             if(handle.uid != uids[handle.index])
                 return nullptr;
             return resources[handle.index].get();

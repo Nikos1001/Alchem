@@ -4,12 +4,17 @@
 
 namespace Alchem {
 
-    void SpriteNode::Initialize(Runtime *rt) {
-        Node2D::Initialize(rt);
+    SpriteNode::SpriteNode(Runtime* rt) : Node2D(rt) {
+
+    }
+
+    void SpriteNode::Initialize() {
+        Node2D::Initialize();
         SetPath(path);
     }
 
     void SpriteNode::Render() {
+        Node2D::Render();
         AlchemRenderer::Texture *tex = runtime->textures->Get(textureHandle);
         glm::mat4 transform = GetTransformation();
         if(tex != nullptr) {
@@ -19,7 +24,6 @@ namespace Alchem {
 
     void SpriteNode::SetPath(const string& newPath) {
         path = newPath;
-        std::cout << path << std::endl;
         textureHandle = runtime->textures->GetHandle(path);
     }
 

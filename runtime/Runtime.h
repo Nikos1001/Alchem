@@ -2,14 +2,14 @@
 #pragma once
 
 #include "../application/Application.h"
-#include "../node/NodeTree.h"
 #include "../resources/ResourceManager.h"
 #include "../renderer/Texture.h"
 #include "../resources/TextureManager.h"
+#include "../node/Node.h"
 
 namespace Alchem {
 
-    class NodeTree;
+    class Node;
 
     class Runtime : public Application {
     public:
@@ -21,7 +21,7 @@ namespace Alchem {
         void Update(f32 delta) override;
         bool ShouldContinue() override;
 
-        ptr<NodeTree> nodes;
+        ptr<Node> root;
 
         string projPath;
     };
