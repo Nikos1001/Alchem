@@ -16,4 +16,9 @@ namespace Alchem {
         AlchemRenderer::Renderer2D::globalTransformation = projection * glm::inverse(GetTransformation());
     }
 
+    void CameraNode::LoadFromJSON(json data) {
+        Node2D::LoadFromJSON(data);
+        cameraSize = data["size"];
+    }
+
 }

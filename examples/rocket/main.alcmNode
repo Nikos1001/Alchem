@@ -1,0 +1,51 @@
+{
+  "name": "root",
+  "type": "Node",
+  "children": [
+    {
+      "name": "camera",
+      "type": "CameraNode",
+      "position": [0, 0],
+      "scale": [1, 1],
+      "rotation": 0,
+      "children": [],
+      "size": 5
+    },
+    {
+      "name": "spike pair",
+      "type": "Node2D",
+      "position": [3, 0],
+      "scale": [1, 1],
+      "rotation": 0,
+      "children": [
+        {
+          "name": "top spike",
+          "type": "SpriteNode",
+          "position": [0, 3.5],
+          "scale": [1.5, -5],
+          "rotation": 0,
+          "spritePath": "Spike.png",
+          "children": []
+        },
+        {
+          "name": "bottom spike",
+          "type": "SpriteNode",
+          "position": [0, -3.5],
+          "scale": [1.5, 5],
+          "rotation": 0,
+          "spritePath": "Spike.png",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "player",
+      "type": "SpriteNode",
+      "position": [0, 0],
+      "scale": [1, 0.75],
+      "rotation": 0,
+      "spritePath": "Rocket.png",
+      "children": []
+    }
+  ]
+}
