@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(Alchem)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(EDITOR true)
 set(CMAKE_CXX_FLAGS -L/usr/local/lib/)
 
@@ -20,6 +20,8 @@ include_directories(${GLM_INCLUDE_DIRS})
 target_link_libraries(Alchem PUBLIC ${GLFW_LIBRARIES})
 target_link_libraries(Alchem PUBLIC ${GLEW_LIBRARIES})
 target_link_libraries(Alchem PUBLIC ${GLM_LIBRARIES})
+
+add_subdirectory(lib/ChaiScript)
 
 
 if (APPLE)

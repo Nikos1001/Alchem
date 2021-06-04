@@ -1,7 +1,7 @@
-#version 330 core
+#version 400 core
 
 out vec4 frag;
-in vec2 uv;
+sample in vec2 uv;
 uniform sampler2D uAlbedo[16];
 in float textureIdx;
 
@@ -13,7 +13,6 @@ void main() {
             texIdx = i;
     }
     vec4 color = texture(uAlbedo[texIdx], uv);
-    if(color.a < 0.99f)
-        discard;
+
     frag = color;
 }

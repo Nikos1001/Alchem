@@ -96,7 +96,7 @@ namespace AlchemRenderer {
     }
 
     void Renderer2D::BeginScene() {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.05f, 0.05f, 0.075f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glm::mat4 mat(1.0f);
@@ -107,6 +107,10 @@ namespace AlchemRenderer {
         for(i32 i = 0; i < textureSlots; i++)
             usedTextures[i] = -1;
         drawCalls = 0;
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+
     }
 
     void Renderer2D::EndScene() {
