@@ -46,6 +46,16 @@
       "rotation": 0,
       "spritePath": "Rocket.png",
       "children": []
+    },
+    {
+      "name": "test",
+      "type": "ChaiScriptNode",
+      "scriptPath": "player.chai",
+      "position": [0, -2],
+      "scale": [1, 1],
+      "rotation": 0,
+      "spritePath": "Rocket.png",
+      "children": []
     }
   ]
 }

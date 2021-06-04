@@ -1,0 +1,10 @@
+
+var baseNode = "SpriteNode";
+
+def Initialize() {
+
+}
+
+def Update(delta) {
+    print(delta)
+}

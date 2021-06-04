@@ -14,9 +14,11 @@ namespace Alchem {
         transform = glm::rotate(transform, rotation, glm::vec3(0, 0, 1));
         transform = glm::scale(transform, glm::vec3(scale.x, scale.y, 1));
 
-        Node2D* parent2D = dynamic_cast<Node2D*>(parent);
-        if(parent2D) {
-            transform = parent2D->GetTransformation() * transform;
+        if(parent != nullptr) {
+            Node2D *parent2D = dynamic_cast<Node2D *>(parent);
+            if (parent2D) {
+                transform = parent2D->GetTransformation() * transform;
+            }
         }
 
         return transform;

@@ -3,6 +3,7 @@
 #include "node2D/Node2D.h"
 #include "node2D/cameraNode/CameraNode.h"
 #include "node2D/spriteNode/SpriteNode.h"
+#include "script/ChaiScriptNode.h"
 
 namespace Alchem {
 
@@ -65,6 +66,7 @@ namespace Alchem {
         NODE_TYPE(Node2D);
         NODE_TYPE(CameraNode);
         NODE_TYPE(SpriteNode);
+        NODE_TYPE(ChaiScriptNode);
         node->LoadFromJSON(data);
         return node;
     }

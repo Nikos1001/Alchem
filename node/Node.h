@@ -9,6 +9,7 @@ namespace Alchem {
     class Runtime;
 
     class Node {
+        friend class ChaiScriptNode;
 
     public:
         Node(Runtime* runtime);
@@ -27,7 +28,7 @@ namespace Alchem {
     protected:
         Runtime* runtime;
         array<ptr<Node>> children;
-        Node* parent;
+        Node* parent = nullptr;
     private:
         bool initialized;
     };
