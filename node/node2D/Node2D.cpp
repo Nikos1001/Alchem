@@ -35,4 +35,8 @@ namespace Alchem {
         Node::Initialize();
     }
 
+    void Node2D::SetRotation(float newRotation) {
+        rotation = newRotation;
+    }
+
 }

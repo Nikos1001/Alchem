@@ -3,6 +3,7 @@
 
 #include "../types.h"
 #include "../runtime/Runtime.h"
+#include <any>
 
 namespace Alchem {
 
@@ -25,6 +26,7 @@ namespace Alchem {
 
         virtual void LoadFromJSON(json data);
 
+        string name;
     protected:
         Runtime* runtime;
         array<ptr<Node>> children;

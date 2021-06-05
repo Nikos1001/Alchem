@@ -15,7 +15,10 @@ namespace Alchem {
 
         glm::mat4 GetTransformation();
 
-        glm::vec2 position = glm::vec2(0, 0), scale = glm::vec2(1, 1);
+        void SetRotation(float newRotation);
+
+        glm::vec2 position = glm::vec2(0, 0);
+        glm::vec2 scale = glm::vec2(1, 1);
         f32 rotation = 0;
     };
 

@@ -17,8 +17,9 @@ namespace AlchemRenderer {
         static bool ShouldClose();
         static void EndFrame();
         static WindowSize GetSize();
-    private:
         static GLFWwindow* window;
+    private:
+
 
     };
 }

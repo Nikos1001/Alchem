@@ -24,6 +24,7 @@ namespace Alchem {
         chaiscript::ChaiScript chaiscript;
         ptr<Node> baseNode;
         json loadData;
+
     };
 
 }
