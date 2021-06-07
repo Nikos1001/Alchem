@@ -6,7 +6,7 @@ set(EDITOR true)
 set(CMAKE_CXX_FLAGS -L/usr/local/lib/)
 
 
-add_executable(Alchem main.cpp types.h renderer/ShaderUtils.h renderer/ShaderUtils.cpp renderer/BufferUtils.h renderer/BufferUtils.cpp renderer/Renderer2D.cpp renderer/Renderer2D.h renderer/stb_image.h renderer/TextureUtils.h renderer/TextureUtils.cpp renderer/Window.cpp renderer/Window.h application/Application.cpp application/Application.h runtime/Runtime.cpp runtime/Runtime.h node/Node.cpp node/Node.h node/node2D/Node2D.cpp node/node2D/Node2D.h node/node2D/spriteNode/SpriteNode.cpp node/node2D/spriteNode/SpriteNode.h resources/ResourceManager.cpp resources/ResourceManager.h renderer/Texture.cpp renderer/Texture.h resources/TextureManager.cpp resources/TextureManager.h node/node2D/cameraNode/CameraNode.cpp node/node2D/cameraNode/CameraNode.h node/script/ChaiScriptNode.cpp node/script/ChaiScriptNode.h scripting/chai/ChaiNodeMacros.h input/Input.cpp input/Input.h utils/Random.cpp utils/Random.h lib/chaiscript-glm/chaislcript_glm.hpp)
+add_executable(Alchem main.cpp types.h renderer/ShaderUtils.h renderer/ShaderUtils.cpp renderer/BufferUtils.h renderer/BufferUtils.cpp renderer/Renderer2D.cpp renderer/Renderer2D.h renderer/stb_image.h renderer/TextureUtils.h renderer/TextureUtils.cpp renderer/Window.cpp renderer/Window.h application/Application.cpp application/Application.h runtime/Runtime.cpp runtime/Runtime.h node/Node.cpp node/Node.h node/node2D/Node2D.cpp node/node2D/Node2D.h node/node2D/spriteNode/SpriteNode.cpp node/node2D/spriteNode/SpriteNode.h resources/ResourceManager.cpp resources/ResourceManager.h renderer/Texture.cpp renderer/Texture.h resources/TextureManager.cpp resources/TextureManager.h node/node2D/cameraNode/CameraNode.cpp node/node2D/cameraNode/CameraNode.h input/Input.cpp input/Input.h utils/Random.cpp)
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
@@ -19,8 +19,7 @@ target_link_libraries(Alchem PUBLIC ${GLFW_LIBRARIES})
 target_link_libraries(Alchem PUBLIC ${GLEW_LIBRARIES})
 target_link_libraries(Alchem PUBLIC ${GLM_LIBRARIES})
 
-add_subdirectory(lib/ChaiScript)
-
+add_subdirectory(lib/angelscript-mirror/sdk/angelscript/projects/cmake)
 
 if (APPLE)
     target_link_libraries(Alchem PUBLIC "-framework OpenGL")

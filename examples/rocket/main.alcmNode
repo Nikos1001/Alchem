@@ -13,8 +13,7 @@
     },
     {
       "name": "spike pair",
-      "type": "ChaiScriptNode",
-      "scriptPath": "spike.chai",
+      "type": "Node2D",
       "position": [3, 0],
       "scale": [1, 1],
       "rotation": 0,
@@ -40,93 +39,8 @@
       ]
     },
     {
-      "name": "spike pair",
-      "type": "ChaiScriptNode",
-      "scriptPath": "spike.chai",
-      "position": [13, 0],
-      "scale": [1, 1],
-      "rotation": 0,
-      "children": [
-        {
-          "name": "top spike",
-          "type": "SpriteNode",
-          "position": [0, 4.5],
-          "scale": [1.5, -7.5],
-          "rotation": 0,
-          "spritePath": "Spike.png",
-          "children": []
-        },
-        {
-          "name": "bottom spike",
-          "type": "SpriteNode",
-          "position": [0, -4.5],
-          "scale": [1.5, 7.5],
-          "rotation": 0,
-          "spritePath": "Spike.png",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "spike pair",
-      "type": "ChaiScriptNode",
-      "scriptPath": "spike.chai",
-      "position": [8, 0],
-      "scale": [1, 1],
-      "rotation": 0,
-      "children": [
-        {
-          "name": "top spike",
-          "type": "SpriteNode",
-          "position": [0, 4.5],
-          "scale": [1.5, -7.5],
-          "rotation": 0,
-          "spritePath": "Spike.png",
-          "children": []
-        },
-        {
-          "name": "bottom spike",
-          "type": "SpriteNode",
-          "position": [0, -4.5],
-          "scale": [1.5, 7.5],
-          "rotation": 0,
-          "spritePath": "Spike.png",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "spike pair",
-      "type": "ChaiScriptNode",
-      "scriptPath": "spike.chai",
-      "position": [18, 0],
-      "scale": [1, 1],
-      "rotation": 0,
-      "children": [
-        {
-          "name": "top spike",
-          "type": "SpriteNode",
-          "position": [0, 4.5],
-          "scale": [1.5, -7.5],
-          "rotation": 0,
-          "spritePath": "Spike.png",
-          "children": []
-        },
-        {
-          "name": "bottom spike",
-          "type": "SpriteNode",
-          "position": [0, -4.5],
-          "scale": [1.5, 7.5],
-          "rotation": 0,
-          "spritePath": "Spike.png",
-          "children": []
-        }
-      ]
-    },
-    {
       "name": "player",
-      "type": "ChaiScriptNode",
-      "scriptPath": "player.chai",
+      "type": "SpriteNode",
       "position": [0, 0],
       "scale": [1, 0.75],
       "rotation": 0,
