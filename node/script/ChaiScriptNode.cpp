@@ -5,6 +5,8 @@
 #include "../node2D/spriteNode/SpriteNode.h"
 #include "../../scripting/chai/ChaiNodeMacros.h"
 #include "../../input/Input.h"
+#include "../../utils/Random.h"
+#include "../../lib/chaiscript-glm/chaislcript_glm.hpp"
 
 #define CHAISCRIPT_NODE_TYPE(nodeType) \
     if(baseNodeType == #nodeType) { \
@@ -22,10 +24,12 @@ namespace Alchem {
         Node::LoadFromJSON(data);
         scriptPath = data["scriptPath"];
         loadData = data;
+        children.clear();
     }
 
     void ChaiScriptNode::Initialize() {
         Node::Initialize();
+        chaiscript.add(get_glm_module());
         chaiscript.eval_file(runtime->GetPath(scriptPath));
         string baseNodeType = chaiscript.eval<string>("baseNode");
         CHAISCRIPT_NODE_TYPE(Node);
@@ -36,10 +40,8 @@ namespace Alchem {
         baseNode->LoadFromJSON(loadData);
         baseNode->Initialize();
 
-        chaiscript.add(chaiscript::user_type<glm::vec2>(), "vec2");
-        chaiscript.add(chaiscript::fun(&glm::vec2::x), "x");
-        chaiscript.add(chaiscript::fun(&glm::vec2::y), "y");
         chaiscript.add(chaiscript::fun(&AlchemInput::Input::KeyPressed), "KeyPressed");
+        chaiscript.add(chaiscript::fun(&AlchemUtils::Random::Val), "Random");
 
         try {
             chaiscript("Initialize();");

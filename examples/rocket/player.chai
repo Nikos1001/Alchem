@@ -1,16 +1,33 @@
 
 var baseNode = "SpriteNode";
 
-global vel;
+global vel = 0.0f;
 global velMax = 7.5f;
 global velMin = -10.0f;
+global dead = false;
+global ceilingHeight = 4.75f;
+global originalScale;
 
 def Initialize() {
+    originalScale = scale;
     vel = 0.0f;
 }
 
 def Update(delta) {
-    vel -= 0.5;
+
+    if(dead) {
+        scale = scale * (1 - 10 * delta);
+        if(scale.x < 0.01) {
+            dead = false;
+            position.y = 0;
+            scale = originalScale;
+            vel = 0.0f;
+        }
+        return;
+    }
+
+
+    vel -= 0.5f;
     if(KeyPressed(" ")) {
         vel += 1;
     }
@@ -20,4 +37,11 @@ def Update(delta) {
 
     position.y += vel * delta;
     rotation = max(vel / velMax, -3.14 / 2);
+
+    if(position.y > ceilingHeight) {
+        dead = true;
+    }
+    if(position.y < -ceilingHeight) {
+        dead = true;
+    }
 }
